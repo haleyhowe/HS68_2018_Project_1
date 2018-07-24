@@ -19,98 +19,108 @@ import plotly.graph_objs as go
 
 # !{sys.executable} -m pip install plotly
 
-# In[181]:
+# In[ ]:
 
 data = pd.read_csv('data.csv')
-
-
-# In[183]:
-
 data2 = data.iloc[1:101, :]
 
-data2.describe()
 
+# In[ ]:
 
-# Plots
-
-# In[184]:
-
-#Count- Bar Plot  
-def BarPlot_count(x, data):
-    return sns.countplot(x=x , data= data);
-
-BarPlot_count("number_diagnoses",data2)
-
-
-# In[211]:
-
-def histogram_count(x):
-    trace1 = go.Histogram(
-        x=x,
-        histfunc = 'count',
-        name='control',
-            xbins=dict(
-                start=0,
-                end=9.0,
-                size=0.5
-            ),
-        marker=dict(
-            color='#FFD7E9',
-        ),
-            opacity=0.75
-    )
-    data = [trace1]
+Q1 = 2
+if Q1 == 2:
+    data = data2
+    x = input("Please enter x variable:")
+    #y = input("Please enter y variable:")
+    #x_lab = input("Please enter X-axis label:")
+    #y_lab = input("Please enter Y-axis label:")
+    #title_1 = input("Please enter the title of your graph:")
     
-    layout = go.Layout(
-        title='Count of Number of Diagnoses',
-        xaxis=dict(
-            title='Number of Diagnoses'
-        ),
-        yaxis=dict(
-            title='Count'
-        ),
-        bargap=1,
-        bargroupgap=1
-    )
-    fig = go.Figure(data=data, layout = layout)
-    return py.iplot(fig, filename='styled histogram')
-
-histogram_count(data2['number_diagnoses'])
+    print (type(x))
+    #print(data.x)
+    
+    #y_new= data.y
+    #scatter(x_new,y_new,colorby,x_lab,y_lab,title_1)
 
 
-# In[241]:
+# In[310]:
 
+###Bar Plot-Count
 
-
-def count(variable):
-    new_dic = {}
-    count = 0
-    for index, value in enumerate(variable):
-        for index2, value2 in enumerate(variable):
-            if (value in new_dic == True):
+#This function counts all instances in a variable and creates a barplot to display the results 
+#@param: The variable to be counted, the x_axis label, title of the graph
+#@return: A count bar plot of the variable inputted 
+def count_and_print(variable, x_label, title):
+    def count(variable):
+        new_dic = {}
+        c = (len(variable)-1)
+        for index, value in enumerate(variable):
+            count = 0
+            if((value in new_dic) == True):
                 pass
-            if value == value2:
-                count = count +1 
-            if index2 == len(variable):
-                new_dic = {value:count}
-                return new_dic
+            else:
+                for index2, value2 in enumerate(variable):
+                    if value == value2:
+                        count = count + 1
+                    if index2 == (len(variable)-1):
+                        new_dic[value] =  count
+        return new_dic
 
-                
+    variable = variable
+
+    count_dictionary = count(variable)
+    from collections import OrderedDict
+    from operator import itemgetter
+
+    count_ordered = (OrderedDict(sorted(hello.items(), key = itemgetter(0), reverse = False)))
+
+    def key_list(list):
+        keys_list= []
+        for key in list.keys():
+            keys_list.append(key)
+        return keys_list
+
+    def value_list(list):
+        values_list= []
+        for value in list.values():
+            values_list.append(value)
+        return values_list
+    keys = key_list(count_ordered)
+    values = value_list(count_ordered)
+#Plot the variable
+    f1 = (go.Bar(
+                x=keys,
+                y=values
+        )
+           )
+    layout = go.Layout(
+        title= title,
+        xaxis=dict(
+            title=x_label,
+            titlefont=dict(
+                family='Courier New, monospace',
+                size=18,
+                color='#7f7f7f'
+                )
+            )
+    )
+    
+    data = [f1]
+    fig = go.Figure(data=data,layout=layout)
+    return py.iplot(fig, filename='basic-bar')
+
+count_and_print(data2['number_diagnoses'], "Number of Diagnoses", "Count of Number of Diagnoses")
 
 
-# In[240]:
-
-dictionary = {'orange':1}
-print(dictionary)
-
-print ('orange' in dictionary)
-len(data2['number_diagnoses'])
-x = data2['number_diagnoses']
-
-
-# In[196]:
+# In[318]:
 
 #Scatter Plot
+#This function creates a scatter plot of two variables, the user can also color the values by
+#some sort of classification variable 
+#@param: Two variables the user wants to compare(variable_1, variable_2), X-axis label, Y-axis 
+#label, title of the graph, and a colorby value that the user can color each point by 
+#@return: Scatter plot of two variables being compared 
+
 def scatter(x,y,colorby,x_label,y_label,title):
     trace1 = go.Scatter(
         x = x,
@@ -118,7 +128,7 @@ def scatter(x,y,colorby,x_label,y_label,title):
         mode='markers',
         marker=dict(
             size=16,
-            color = data2[z], #set color equal to a variable
+            color = data2[colorby], #set color equal to a variable
         )
     )
     layout = go.Layout(
@@ -158,6 +168,9 @@ scatter(x,y,colorby,xlabel,ylabel,title)
 # In[197]:
 
 #BoxPlot
+#This function creates a box plot of the two variables the user decides to examine
+#@param: the x and y vales, along with the labels and the title of the graph
+#@return: A box plot
 def boxplot(x,y, y_label, x_label, title):
     data = [go.Box(x= x,
             y= y)]
