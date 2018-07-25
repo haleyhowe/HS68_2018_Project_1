@@ -165,39 +165,37 @@ title = "Num Lab Procedures by Readmission"
 boxplot(test_x,test_y,ylab, xlab, title)
 
 
-# In[22]:
+# In[30]:
 
 
-Q1 = 4
-if Q1 == 2:
-    x1 = input("Please enter X variable:")
-    x = data2[x1]
-    x2 = input("Please enter X variable:")
-    xx = data2[x2]
-    y = input("Please enter Y variable:")
-    x_lab = input("Please enter the label for the X-Axis:")
-    y_lab = input("Please enter the label for the Y-Axis:")
-    title = input("Please enter the title of the graph:")
-    scatter(x,xx, y, x_lab, y_lab, title)
+def question(Q1):
+    if Q1 == 2:
+        x1 = input("Please enter X variable:")
+        x = data2[x1]
+        x2 = input("Please enter X variable:")
+        xx = data2[x2]
+        y = input("Please enter Y variable:")
+        x_lab = input("Please enter the label for the X-Axis:")
+        y_lab = input("Please enter the label for the Y-Axis:")
+        title = input("Please enter the title of the graph:")
+        return scatter(x,xx, y, x_lab, y_lab, title);
 
-if Q1 == 3:
-    x1 = input("Please enter a variable:")
-    x = data2[x1]
-    x_lab = input("Please enter the label for the X-Axis:")
-    title = input("Please enter the title of your graph:")
-    count_and_print(x, x_lab, title)
+    if Q1 == 3:
+        x1 = input("Please enter a variable:")
+        x = data2[x1]
+        x_lab = input("Please enter the label for the X-Axis:")
+        title = input("Please enter the title of your graph:")
+        return count_and_print(x, x_lab, title);
 
 
-if Q1==4:
-    x = data2[input("Please X variable:")]
-    y = data2[input("Please Y variable:")]
-    x_lab = input("Please enter the label for the X-Axis:")
-    y_lab = input("Please enter the label for the Y-Axis:")
-    title = input("Please enter the title of your graph:")
+    if Q1==4:
+        x = data2[input("Please X variable:")]
+        y = data2[input("Please Y variable:")]
+        x_lab = input("Please enter the label for the X-Axis:")
+        y_lab = input("Please enter the label for the Y-Axis:")
+        title = input("Please enter the title of your graph:")
+        return boxplot(x,y,x_lab,y_lab,title);
     
-boxplot(x,y,x_lab,y_lab,title)
-    
-
-    
+question(4)   
   
 
