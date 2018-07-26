@@ -95,6 +95,11 @@ count_and_print(data2['number_diagnoses'], "Number of Diagnoses", "Count of Numb
 
 # In[7]:
 
+#Scatter Plot 
+#This function outputs a scatter plot with respects to user input. The user can specify
+#if they want to color each data point by a categorical variable
+#@param: x variable, y variable, x and y axis labels and the title of the plot
+#@returns: a scatter plot 
 def scatter(x,y,colorby,xlabel,ylabel,title):
     trace1 = go.Scatter(
         x = x,
@@ -180,7 +185,7 @@ def question(Q1):
         title = input("Please enter the title of the graph:")
         return scatter(x,xx, y, x_lab, y_lab, title);
 
-    if Q1 == 3:
+    if Q1 == 1:
         x1 = input("Please enter a variable:")
         x = data2[x1]
         x_lab = input("Please enter the label for the X-Axis:")
@@ -188,7 +193,7 @@ def question(Q1):
         return count_and_print(x, x_lab, title);
 
 
-    if Q1==4:
+    if Q1==3:
         x = data2[input("Please X variable:")]
         y = data2[input("Please Y variable:")]
         x_lab = input("Please enter the label for the X-Axis:")
