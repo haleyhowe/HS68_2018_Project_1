@@ -1,3 +1,4 @@
+#This is a test to see if the merge commit worked 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
