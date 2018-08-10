@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+This is a module that outputs the corresponding visualization tool requested by the user. The module requires that the user has the train and test subsets already locally stored within the file (see bottom of file for details). Acquiring a plotly account is reccomended. 
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+"""
 import numpy as np
-import pandas as pd
-import sys 
 import plotly.plotly as py
 import plotly.graph_objs as go
 from sklearn import datasets, linear_model
@@ -12,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error,mean_absolute_error, r2_score
 ###This is importing a class from Issue #11 Test module. We used the ratio function to determine the test size ratio for the train_test_split function. 
 #from Test import data_split as ds
+
 
 
 def count_and_print(variable_name, x_label, title):
@@ -354,6 +354,9 @@ def prompt_user():
     Q1= input("What type of plot output? (Enter #)"+"\n"+"\n"+"1.Countplot"+"\n"+"2.Scatterplot"+"\n"+"3.Boxplot"+"\n"+"4.Simple Linear Regression Model"+"\n"+"5.Multiple Linear Regression Model"+"\n")
     question(data,Xtrain,Xtest,ytrain,ytest, Q1)
 
+"""
+Here we assume that the user already has these variables stored locally as np.arrays.
+"""
 #data = pd.read_csv('data.csv')
 #sub_data = data.iloc[1:10,1:10]
 #X = sub_data.iloc[:,0:3]
