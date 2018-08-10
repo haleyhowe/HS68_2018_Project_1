@@ -40,11 +40,14 @@ def count_and_print(variable_name, x_label, title):
         """
         new_dic = {}
         c = (len(x1)-1)
+        # looping through the list
         for index, value in enumerate(x1):
             count = 0
+            # checks to see if the value was in list, if it is then goes to the next index
             if((value in new_dic) == True):
                 pass
             else:
+                # accumulates the count for that unique value 
                 for index2, value2 in enumerate(x1):
                     if value == value2:
                         count = count + 1
@@ -56,7 +59,7 @@ def count_and_print(variable_name, x_label, title):
     from collections import OrderedDict
     from operator import itemgetter
 
-    count_ordered = (OrderedDict(sorted(count_dictionary.items(), key = itemgetter(0), reverse = False)))
+    count_ordered_list = (OrderedDict(sorted(count_dictionary.items(), key = itemgetter(0), reverse = False)))
 
     def key_list(ordered_dictionary):
         """
@@ -88,8 +91,8 @@ def count_and_print(variable_name, x_label, title):
             values_list.append(value)
         return values_list
     
-    keys = key_list(count_ordered)
-    values = value_list(count_ordered)
+    keys = key_list(count_ordered_list)
+    values = value_list(count_ordered_list)
     f1 = (go.Bar(
                 x=keys,
                 y=values
